@@ -121,10 +121,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 SWAGGER_SETTINGS = {
-    'USE_SESSION_AUTH': False,  # add Django Login and Django Logout buttons, CSRF token to swagger UI page
-    'LOGIN_URL': getattr(conf.settings, 'LOGIN_URL', None),  # URL for the login button
-    'LOGOUT_URL': getattr(conf.settings, 'LOGOUT_URL', None),  # URL for the logout button
-
+    'USE_SESSION_AUTH': True,  # add Django Login and Django Logout buttons, CSRF token to swagger UI page
+    'LOGIN_URL': 'rest_framework:login',
+    'LOGOUT_URL': 'rest_framework:logout',
     # Swagger security definitions to include in the schema;
     # see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#security-definitions-object
     'SECURITY_DEFINITIONS': {

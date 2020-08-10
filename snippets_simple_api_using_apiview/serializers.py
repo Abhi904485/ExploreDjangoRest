@@ -1,3 +1,5 @@
+from drf_yasg import openapi
+
 from .models import SnippetApiView, LANGUAGE_CHOICES, STYLE_CHOICES
 
 from rest_framework import serializers
@@ -10,6 +12,38 @@ class SimpleApiViewSnippetSerializer(serializers.Serializer):
     linenos = serializers.BooleanField(required=False)
     language = serializers.ChoiceField(choices=LANGUAGE_CHOICES, default="python")
     style = serializers.ChoiceField(choices=STYLE_CHOICES, default='friendly')
+
+    # class Meta:
+    #     swagger_schema_fields = {
+    #         "type": openapi.TYPE_OBJECT,
+    #         "title": "SnippetApiView",
+    #         "properties": {
+    #             "title": openapi.Schema(
+    #                 title="Title",
+    #                 type=openapi.TYPE_STRING,
+    #             ),
+    #             "code": openapi.Schema(
+    #                 title="Code",
+    #                 type=openapi.TYPE_STRING,
+    #             ),
+    #             "linenos": openapi.Schema(
+    #                 title="linenos",
+    #                 type=openapi.TYPE_BOOLEAN,
+    #             ),
+    #             "language": openapi.Schema(
+    #                 title="language",
+    #                 type=openapi.IN_QUERY,
+    #                 enum = LANGUAGE_CHOICES,
+    #
+    #             ),
+    #             "style": openapi.Schema(
+    #                 title="style",
+    #                 type=openapi.IN_QUERY,
+    #                 enum= STYLE_CHOICES,
+    #             )
+    #         },
+    #         "required": ["title", "code"],
+    #     }
 
     def create(self, validated_data):
         """

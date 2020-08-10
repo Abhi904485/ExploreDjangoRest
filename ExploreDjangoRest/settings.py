@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+from django import conf
+
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'snippets_simple_api',
     'snippets_simple_api_using_apiview',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -116,3 +119,43 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SWAGGER_SETTINGS = {
+    'USE_SESSION_AUTH': False,  # add Django Login and Django Logout buttons, CSRF token to swagger UI page
+    'LOGIN_URL': getattr(conf.settings, 'LOGIN_URL', None),  # URL for the login button
+    'LOGOUT_URL': getattr(conf.settings, 'LOGOUT_URL', None),  # URL for the logout button
+
+    # Swagger security definitions to include in the schema;
+    # see https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#security-definitions-object
+    'SECURITY_DEFINITIONS': {
+        'basic': {
+            'type': 'basic'
+        }
+    },
+
+    # url to an external Swagger validation service; defaults to 'http://online.swagger.io/validator/'
+    # set to None to disable the schema validation badge in the UI
+    'VALIDATOR_URL': '',
+
+    # swagger-ui configuration settings, see https://github.com/swagger-api/swagger-ui/blob/112bca906553a937ac67adc2e500bdeed96d067b/docs/usage/configuration.md#parameters
+    'OPERATIONS_SORTER': None,
+    'TAGS_SORTER': None,
+    'DOC_EXPANSION': 'list',
+    'DEEP_LINKING': False,
+    'SHOW_EXTENSIONS': True,
+    'DEFAULT_MODEL_RENDERING': 'model',
+    'DEFAULT_MODEL_DEPTH': 2,
+}
+
+REDOC_SETTINGS = {
+    'LAZY_RENDERING': False,
+
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+
+    )
+}

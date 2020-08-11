@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import dj_database_url
+from decouple import config
 from django import conf
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -79,10 +81,9 @@ WSGI_APPLICATION = 'ExploreDjangoRest.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'postgres://fjhphodgwbfqdx:1874155c8067052c8d2301097ede18eab76222c20824904fc23cae207d23cbb1@ec2-52-204-232-46.compute-1.amazonaws.com:5432/dbbggpe9ds7api'
-
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
 }
 
 # Password validation
@@ -162,3 +163,5 @@ REST_FRAMEWORK = {
 }
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+import django_heroku
+django_heroku.settings(locals())

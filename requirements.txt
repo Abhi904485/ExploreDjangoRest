@@ -65,3 +65,5 @@ virtualenv==20.0.30
 virtualenv-clone==0.5.4
 whitenoise==5.2.0
 wrapt==1.12.1
+dj-database-url==0.5.0
+django-heroku==0.3.1

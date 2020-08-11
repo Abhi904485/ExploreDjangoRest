@@ -80,8 +80,8 @@ WSGI_APPLICATION = 'ExploreDjangoRest.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3')
+        'postgres://fjhphodgwbfqdx:1874155c8067052c8d2301097ede18eab76222c20824904fc23cae207d23cbb1@ec2-52-204-232-46.compute-1.amazonaws.com:5432/dbbggpe9ds7api'
+
     }
 }
 

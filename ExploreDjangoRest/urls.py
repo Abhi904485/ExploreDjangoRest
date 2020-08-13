@@ -40,7 +40,10 @@ urlpatterns = [
     url(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('auth/', include('rest_framework.urls')),
     path('', include('snippets_simple_api.api_urls')),
-    path('', include('snippets_simple_api_using_apiview.api_urls'))
+    path('', include('snippets_simple_api_using_apiview.api_urls')),
+    path('', include('snippets_simple_api_using_class_view.api_urls')),
+    path('', include('snippets_simple_api_using_mixin.api_urls')),
+    path('', include('snippets_simple_api_using_generic_class.api_urls'))
 ]
 
 if settings.DEBUG:

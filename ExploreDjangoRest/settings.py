@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ep$$8(znz6#o3(3hww8ezvtww5va^wdn1&6rjlatohexp-9)d%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'snippets_simple_api',
     'snippets_simple_api_using_apiview',
+    'snippets_simple_api_using_class_view',
+    'snippets_simple_api_using_mixin',
+    'snippets_simple_api_using_generic_class',
     'drf_yasg',
 ]
 
@@ -81,9 +84,15 @@ WSGI_APPLICATION = 'ExploreDjangoRest.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
+    # 'default': dj_database_url.config(default=config('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'exploredjangorest',
+        'USER': 'postgres',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
 }
 
 # Password validation
@@ -164,4 +173,5 @@ REST_FRAMEWORK = {
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 import django_heroku
+
 django_heroku.settings(locals())

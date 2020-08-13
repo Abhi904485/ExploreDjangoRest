@@ -5,7 +5,7 @@ from rest_framework import serializers
 
 class SimpleApiSnippetSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
-    title = serializers.CharField(allow_blank=True, max_length=100, required=False)
+    title = serializers.CharField(allow_blank=True, max_length=100, required=True)
     code = serializers.CharField(style={'base_template': 'textarea.html'})
     linenos = serializers.BooleanField(required=False)
     language = serializers.ChoiceField(choices=LANGUAGE_CHOICES, default="python")

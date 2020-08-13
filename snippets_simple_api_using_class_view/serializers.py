@@ -1,11 +1,11 @@
 from drf_yasg import openapi
 
-from .models import SnippetApiView, LANGUAGE_CHOICES, STYLE_CHOICES
+from .models import SnippetApiClassView, LANGUAGE_CHOICES, STYLE_CHOICES
 
 from rest_framework import serializers
 
 
-class SimpleApiViewSnippetSerializer(serializers.Serializer):
+class SimpleClassApiViewSnippetSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     title = serializers.CharField(allow_blank=True, max_length=100, required=True)
     code = serializers.CharField(style={'base_template': 'textarea.html'})
@@ -51,7 +51,7 @@ class SimpleApiViewSnippetSerializer(serializers.Serializer):
         :param validated_data:dict
         :return:
         """
-        return SnippetApiView.objects.create(**validated_data)
+        return SnippetApiClassView.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
         """

@@ -50,6 +50,11 @@ style = openapi.Parameter(
 )
 
 
+@swagger_auto_schema(method='GET', operation_description="Retrieve all code SnippetApiView.",
+                     responses={status.HTTP_200_OK: SimpleApiViewSnippetSerializer,
+                                status.HTTP_404_NOT_FOUND: "Not Found"},
+                     operation_summary="Retrieve all code SnippetApiView."
+                     )
 @swagger_auto_schema(method='POST',
                      manual_parameters=[title, code, linenos, language, style],
                      responses={status.HTTP_201_CREATED: SimpleApiViewSnippetSerializer,
@@ -81,51 +86,8 @@ def snippet_list_api_view(request):
         return HttpResponse(status=status.HTTP_400_BAD_REQUEST)
 
 
-p_title = openapi.Parameter(
-    name="title",
-    description="Enter Title",
-    in_=openapi.IN_QUERY,
-    type=openapi.TYPE_STRING,
-    required=False
-)
-p_code = openapi.Parameter(
-    name="code",
-    description="Enter Code",
-    in_=openapi.IN_QUERY,
-    type=openapi.TYPE_STRING,
-    required=True
-)
-p_linenos = openapi.Parameter(
-    name="linenos",
-    description="Enter linenos",
-    in_=openapi.IN_QUERY,
-    type=openapi.TYPE_BOOLEAN,
-    default=False,
-    required=False
-)
-p_language = openapi.Parameter(
-    name="language",
-    description="Enter Language",
-    in_=openapi.IN_QUERY,
-    type=openapi.TYPE_STRING,
-    enum=[lan[0] for lan in LANGUAGE_CHOICES],
-    default="python",
-    required=False
-
-)
-p_style = openapi.Parameter(
-    name="style",
-    description="Enter Style",
-    in_=openapi.IN_QUERY,
-    type=openapi.TYPE_STRING,
-    enum=[style[0] for style in STYLE_CHOICES],
-    default="friendly",
-    required=False
-)
-
-
 @swagger_auto_schema(method='PUT',
-                     manual_parameters=[p_title, p_code, p_linenos, p_language, p_style],
+                     manual_parameters=[title, code, linenos, language, style],
                      responses={status.HTTP_200_OK: SimpleApiViewSnippetSerializer,
                                 status.HTTP_400_BAD_REQUEST: "Bad Request"},
                      operation_description="Retrieve, update or delete a code SnippetApiView.",

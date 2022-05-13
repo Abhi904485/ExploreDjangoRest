@@ -7,7 +7,7 @@ LANGUAGE_CHOICES = sorted([(item[1][0], item[0]) for item in LEXERS])
 STYLE_CHOICES = sorted([(item, item) for item in get_all_styles()])
 
 
-class Snippet(models.Model):
+class SnippetViewSet(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=100, blank=False, default='')
     code = models.TextField()
@@ -17,7 +17,7 @@ class Snippet(models.Model):
 
     class Meta:
         ordering = ['created']
-        db_table = "Snippet"
+        db_table = "SnippetViewSet"
 
     def __str__(self):
         return self.title

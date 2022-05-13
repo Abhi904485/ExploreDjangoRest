@@ -40,11 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'snippets_simple_api',
-    'snippets_simple_api_using_apiview',
-    'snippets_simple_api_using_class_view',
-    'snippets_simple_api_using_mixin',
-    'snippets_simple_api_using_generic_class',
+    'snippets_function_view',
+    'snippets_api_class_view',
+    'snippets_mixin_class_view',
+    'snippets_generic_class_view',
+    'snippets_viewsets',
+    'snippets_modelviewset',
+    'snippets_viewset_mixin',
     'drf_yasg',
 ]
 
@@ -84,15 +88,14 @@ WSGI_APPLICATION = 'ExploreDjangoRest.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default=config('DATABASE_URL'))
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'exploredjangorest',
-    #     'USER': 'postgres',
-    #     'PASSWORD': '',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '5432',
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'exploredjangorest',
+        'USER': 'postgres',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
 }
 
 # Password validation
@@ -166,11 +169,8 @@ REDOC_SETTINGS = {
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
 
     )
 }
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-import django_heroku
-django_heroku.settings(locals())
